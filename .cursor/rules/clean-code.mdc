@@ -1,0 +1,247 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 📘 Next.js Clean Code Rules
+
+Um guia prático para manter um projeto Next.js limpo, consistente e escalável.
+
+---
+
+## 📁 1. Estrutura de Pastas
+
+- Use `app/` para rotas com App Router (Next 13+).
+- Use `src/` para todo código da aplicação (ex: `src/app`, `src/components`, etc).
+- Mantenha a estrutura modular e funcional:
+
+```
+src/
+│
+├── app/               # Rotas da aplicação
+│   └── dashboard/
+│       └── page.tsx   # Página da rota
+│       └── layout.tsx # Layout da rota
+│
+├── components/        # Componentes reutilizáveis
+│   └── Button.tsx
+│   └── Header.tsx
+│
+├── features/          # Domínios da aplicação (DDD)
+│   └── auth/
+│       ├── components/
+│       ├── services/
+│       ├── types.ts
+│       └── index.ts
+│
+├── lib/               # Helpers, utils e configs
+├── hooks/             # Custom React Hooks
+├── services/          # Comunicação com APIs
+├── store/             # Zustand, Redux ou Context
+├── types/             # Tipagens globais
+├── styles/            # Estilos globais e variáveis
+├── constants/         # Constantes usadas no projeto
+```
+
+---
+
+## 🧱 2. Componentes
+
+- Componentes devem ser pequenos e focados em uma única responsabilidade.
+- Separe lógica (hooks) de visual (UI).
+- Use `PascalCase` para nomes de componentes.
+- Prefira componentes funcionais com hooks.
+
+```tsx
+// Ruim
+function LoginComponent() {
+  // muito código
+}
+
+// Bom
+function LoginForm() {
+  return <form>{/* ... */}</form>;
+}
+```
+
+---
+
+## 🌐 3. Páginas e Rotas
+
+- Use pastas com `page.tsx` para rotas (App Router).
+- Coloque arquivos `layout.tsx` onde for necessário layout persistente.
+- Nomeie rotas dinamicamente com `[param]`.
+
+```bash
+/app/products/[id]/page.tsx
+```
+
+---
+
+## 🧪 4. Funções
+
+- Uma função = uma responsabilidade.
+- Use nomes descritivos (não use `doSomething()`).
+- Tipagem explícita sempre (`: string`, `: number`, etc).
+
+```ts
+// Ruim
+function handle() {}
+
+function getData(a: any) {
+  return a;
+}
+
+// Bom
+function handleLoginSubmit(formData: LoginFormData): Promise<void> {}
+
+function getUserById(userId: string): User | null {}
+```
+
+---
+
+## 🏷️ 5. Tipagens (TypeScript)
+
+- Sempre tipar funções, props e retornos.
+- Centralize tipagens em `types/` ou `features/x/types.ts`.
+- Use interfaces para objetos e tipos para aliases.
+
+```ts
+// Preferível
+interface User {
+  id: string;
+  name: string;
+}
+
+// Aceitável
+type UserRole = 'admin' | 'editor' | 'viewer';
+```
+
+---
+
+## ♻️ 6. Reutilização
+
+- Crie componentes reutilizáveis em `/components`.
+- Use hooks para lógica de negócio (em `/hooks` ou `/features/x/hooks.ts`).
+- Use serviços para comunicações com APIs.
+
+---
+
+## 🛠️ 7. Services/API
+
+- Use `axios` ou `fetch` com wrappers.
+- Centralize chamadas HTTP em `/services`.
+- Nunca use chamadas diretas a API dentro de componentes.
+
+```ts
+// /services/userService.ts
+export async function fetchUsers(): Promise<User[]> {
+  const res = await fetch('/api/users');
+  return res.json();
+}
+```
+
+---
+
+## 📦 8. Imports
+
+- Use paths absolutos (configure `tsconfig.json`).
+- Agrupe imports: libs externas, internas, relativas, estilos.
+
+```ts
+// Bom
+import { useEffect } from 'react';
+import { fetchUsers } from '@/services/userService';
+import { Button } from '@/components/Button';
+import './styles.css';
+```
+
+---
+
+## 🔒 9. Segurança
+
+- Nunca exponha tokens ou segredos no client.
+- Use `.env.local` para variáveis sensíveis.
+- Valide dados no backend sempre.
+
+---
+
+## 📄 10. Nomenclatura
+
+| Tipo         | Convenção    | Exemplo            |
+|--------------|--------------|--------------------|
+| Componentes  | PascalCase   | `UserCard.tsx`     |
+| Funções      | camelCase    | `handleSubmit()`   |
+| Variáveis    | camelCase    | `userList`         |
+| Pastas       | kebab-case   | `user-profile/`    |
+| Tipos        | PascalCase   | `UserData`         |
+| Constantes   | UPPER_CASE   | `MAX_RETRIES`      |
+
+---
+
+## ✅ 11. Boas Práticas Gerais
+
+- Nunca deixe `console.log` em produção.
+- Use ESLint + Prettier para manter o código padronizado.
+- Comente apenas o que não é óbvio.
+- Use mensagens claras em commits.
+- Prefira `async/await` no lugar de `.then()`.
+
+---
+
+## 🧪 12. Testes
+
+- Use `jest`, `testing-library/react` e `msw` para mocks.
+- Crie arquivos `*.test.tsx` próximos ao componente.
+- Teste lógica crítica e comportamento visível.
+
+---
+
+## 🧼 13. Clean Imports
+
+Configure `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  }
+}
+```
+
+---
+
+## 📂 14. Arquivos Especiais
+
+- `.env.local`: variáveis sensíveis.
+- `.eslint.json`: regras de lint.
+- `.prettierrc`: formatação.
+- `README.md`: documentação inicial.
+- `.gitignore`: arquivos ignorados pelo git.
+
+---
+
+## 📚 15. Documentação
+
+- Documente os módulos complexos com comentários de **bloco**.
+- Mantenha README atualizado.
+- Use JSDoc para explicar funções reutilizáveis.
+
+```ts
+/**
+ * Retorna o usuário logado pelo ID
+ * @param userId - ID do usuário
+ * @returns Objeto User
+ */
+function getUserById(userId: string): User {}
+```
+
+---
+
+## 🔚 Fim
+
+
+Siga este guia para manter seu projeto organizado, profissional e fácil de escalar. 🚀

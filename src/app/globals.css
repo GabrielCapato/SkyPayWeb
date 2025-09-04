@@ -1,0 +1,329 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display-regular.woff2') format('woff2'),
+       url('/fonts/sf-pro-display-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display-medium.woff2') format('woff2'),
+       url('/fonts/sf-pro-display-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display-semibold.woff2') format('woff2'),
+       url('/fonts/sf-pro-display-semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/sf-pro-display-bold.woff2') format('woff2'),
+       url('/fonts/sf-pro-display-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('/fonts/sf-pro-text-regular.woff2') format('woff2'),
+       url('/fonts/sf-pro-text-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('/fonts/sf-pro-text-medium.woff2') format('woff2'),
+       url('/fonts/sf-pro-text-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('/fonts/sf-pro-text-semibold.woff2') format('woff2'),
+       url('/fonts/sf-pro-text-semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('/fonts/sf-pro-text-bold.woff2') format('woff2'),
+       url('/fonts/sf-pro-text-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  src: url('/fonts/sfmono-regular.woff2') format('woff2'),
+       url('/fonts/sfmono-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  src: url('/fonts/sfmono-medium.woff2') format('woff2'),
+       url('/fonts/sfmono-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  src: url('/fonts/sfmono-semibold.woff2') format('woff2'),
+       url('/fonts/sfmono-semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Mono';
+  src: url('/fonts/sfmono-bold.woff2') format('woff2'),
+       url('/fonts/sfmono-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Grid System */
+  .row {
+    @apply flex flex-wrap -mx-4;
+  }
+
+  .col {
+    @apply px-4 flex-grow-0 flex-shrink-0;
+  }
+
+  /* Colunas */
+  .col-auto {
+    @apply flex-grow-1 flex-shrink-0;
+  }
+
+  /* Extra Small (xs) - Default */
+  .col-1 { @apply w-[8.333333%]; }
+  .col-2 { @apply w-[16.666667%]; }
+  .col-3 { @apply w-[25%]; }
+  .col-4 { @apply w-[33.333333%]; }
+  .col-5 { @apply w-[41.666667%]; }
+  .col-6 { @apply w-[50%]; }
+  .col-7 { @apply w-[58.333333%]; }
+  .col-8 { @apply w-[66.666667%]; }
+  .col-9 { @apply w-[75%]; }
+  .col-10 { @apply w-[83.333333%]; }
+  .col-11 { @apply w-[91.666667%]; }
+  .col-12 { @apply w-full; }
+
+  /* Small (sm) */
+  @media (min-width: 640px) {
+    .col-sm-auto { @apply flex-grow-1 flex-shrink-0; }
+    .col-sm-1 { @apply w-[8.333333%]; }
+    .col-sm-2 { @apply w-[16.666667%]; }
+    .col-sm-3 { @apply w-[25%]; }
+    .col-sm-4 { @apply w-[33.333333%]; }
+    .col-sm-5 { @apply w-[41.666667%]; }
+    .col-sm-6 { @apply w-[50%]; }
+    .col-sm-7 { @apply w-[58.333333%]; }
+    .col-sm-8 { @apply w-[66.666667%]; }
+    .col-sm-9 { @apply w-[75%]; }
+    .col-sm-10 { @apply w-[83.333333%]; }
+    .col-sm-11 { @apply w-[91.666667%]; }
+    .col-sm-12 { @apply w-full; }
+  }
+
+  /* Medium (md) */
+  @media (min-width: 768px) {
+    .col-md-auto { @apply flex-grow-1 flex-shrink-0; }
+    .col-md-1 { @apply w-[8.333333%]; }
+    .col-md-2 { @apply w-[16.666667%]; }
+    .col-md-3 { @apply w-[25%]; }
+    .col-md-4 { @apply w-[33.333333%]; }
+    .col-md-5 { @apply w-[41.666667%]; }
+    .col-md-6 { @apply w-[50%]; }
+    .col-md-7 { @apply w-[58.333333%]; }
+    .col-md-8 { @apply w-[66.666667%]; }
+    .col-md-9 { @apply w-[75%]; }
+    .col-md-10 { @apply w-[83.333333%]; }
+    .col-md-11 { @apply w-[91.666667%]; }
+    .col-md-12 { @apply w-full; }
+  }
+
+  /* Large (lg) */
+  @media (min-width: 1024px) {
+    .col-lg-auto { @apply flex-grow-1 flex-shrink-0; }
+    .col-lg-1 { @apply w-[8.333333%]; }
+    .col-lg-2 { @apply w-[16.666667%]; }
+    .col-lg-3 { @apply w-[25%]; }
+    .col-lg-4 { @apply w-[33.333333%]; }
+    .col-lg-5 { @apply w-[41.666667%]; }
+    .col-lg-6 { @apply w-[50%]; }
+    .col-lg-7 { @apply w-[58.333333%]; }
+    .col-lg-8 { @apply w-[66.666667%]; }
+    .col-lg-9 { @apply w-[75%]; }
+    .col-lg-10 { @apply w-[83.333333%]; }
+    .col-lg-11 { @apply w-[91.666667%]; }
+    .col-lg-12 { @apply w-full; }
+  }
+
+  /* Extra Large (xl) */
+  @media (min-width: 1280px) {
+    .col-xl-auto { @apply flex-grow-1 flex-shrink-0; }
+    .col-xl-1 { @apply w-[8.333333%]; }
+    .col-xl-2 { @apply w-[16.666667%]; }
+    .col-xl-3 { @apply w-[25%]; }
+    .col-xl-4 { @apply w-[33.333333%]; }
+    .col-xl-5 { @apply w-[41.666667%]; }
+    .col-xl-6 { @apply w-[50%]; }
+    .col-xl-7 { @apply w-[58.333333%]; }
+    .col-xl-8 { @apply w-[66.666667%]; }
+    .col-xl-9 { @apply w-[75%]; }
+    .col-xl-10 { @apply w-[83.333333%]; }
+    .col-xl-11 { @apply w-[91.666667%]; }
+    .col-xl-12 { @apply w-full; }
+  }
+
+  /* 2XL */
+  @media (min-width: 1536px) {
+    .col-xxl-auto { @apply flex-grow-1 flex-shrink-0; }
+    .col-xxl-1 { @apply w-[8.333333%]; }
+    .col-xxl-2 { @apply w-[16.666667%]; }
+    .col-xxl-3 { @apply w-[25%]; }
+    .col-xxl-4 { @apply w-[33.333333%]; }
+    .col-xxl-5 { @apply w-[41.666667%]; }
+    .col-xxl-6 { @apply w-[50%]; }
+    .col-xxl-7 { @apply w-[58.333333%]; }
+    .col-xxl-8 { @apply w-[66.666667%]; }
+    .col-xxl-9 { @apply w-[75%]; }
+    .col-xxl-10 { @apply w-[83.333333%]; }
+    .col-xxl-11 { @apply w-[91.666667%]; }
+    .col-xxl-12 { @apply w-full; }
+  }
+
+  /* Gutters */
+  .g-0 {
+    @apply mx-0;
+  }
+  .g-0 > * {
+    @apply px-0;
+  }
+
+  /* Alinhamento */
+  .align-items-start { @apply items-start; }
+  .align-items-center { @apply items-center; }
+  .align-items-end { @apply items-end; }
+
+  /* Justificação */
+  .justify-content-start { @apply justify-start; }
+  .justify-content-center { @apply justify-center; }
+  .justify-content-end { @apply justify-end; }
+  .justify-content-between { @apply justify-between; }
+  .justify-content-around { @apply justify-around; }
+
+  /* Offset */
+  .offset-1 { @apply ml-[8.333333%]; }
+  .offset-2 { @apply ml-[16.666667%]; }
+  .offset-3 { @apply ml-[25%]; }
+  .offset-4 { @apply ml-[33.333333%]; }
+  .offset-5 { @apply ml-[41.666667%]; }
+  .offset-6 { @apply ml-[50%]; }
+  .offset-7 { @apply ml-[58.333333%]; }
+  .offset-8 { @apply ml-[66.666667%]; }
+  .offset-9 { @apply ml-[75%]; }
+  .offset-10 { @apply ml-[83.333333%]; }
+  .offset-11 { @apply ml-[91.666667%]; }
+
+  /* Order */
+  .order-1 { @apply order-1; }
+  .order-2 { @apply order-2; }
+  .order-3 { @apply order-3; }
+  .order-4 { @apply order-4; }
+  .order-5 { @apply order-5; }
+  .order-6 { @apply order-6; }
+  .order-7 { @apply order-7; }
+  .order-8 { @apply order-8; }
+  .order-9 { @apply order-9; }
+  .order-10 { @apply order-10; }
+  .order-11 { @apply order-11; }
+  .order-12 { @apply order-12; }
+}
+
+@layer utilities {
+  .animate-scale-check {
+    animation: scale-check 0.3s ease-in-out;
+  }
+
+  .animate-scale-x {
+    animation: scale-x 0.3s ease-in-out;
+  }
+
+  @keyframes scale-check {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes scale-x {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
