@@ -10,6 +10,7 @@ interface CustomInputProps extends Omit<React.InputHTMLAttributes<HTMLInputEleme
   containerClassName?: string;
   mask?: string;
   maskPlaceholder?: string;
+  rightElement?: React.ReactNode;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -21,6 +22,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   mask,
   maskPlaceholder = '_',
   placeholder,
+  rightElement,
   ...props
 }) => {
   const sizeClasses = {
@@ -87,24 +89,31 @@ const CustomInput: React.FC<CustomInputProps> = ({
           {label}
         </label>
       )}
-      {mask ? (
-        <PatternFormat
-          format={getFormat(mask) || ''}
-          mask={maskPlaceholder}
-          className={inputClasses}
-          value={props.value as string}
-          onChange={props.onChange as React.ChangeEventHandler<HTMLInputElement>}
-          placeholder={getDefaultPlaceholder(mask)}
-          disabled={props.disabled}
-          required={props.required}
-        />
-      ) : (
-        <input
-          className={inputClasses}
-          placeholder={placeholder}
-          {...props}
-        />
-      )}
+      <div className="relative">
+        {mask ? (
+          <PatternFormat
+            format={getFormat(mask) || ''}
+            mask={maskPlaceholder}
+            className={`${inputClasses} ${rightElement ? 'pr-12' : ''}`}
+            value={props.value as string}
+            onChange={props.onChange as React.ChangeEventHandler<HTMLInputElement>}
+            placeholder={getDefaultPlaceholder(mask)}
+            disabled={props.disabled}
+            required={props.required}
+          />
+        ) : (
+          <input
+            className={`${inputClasses} ${rightElement ? 'pr-12' : ''}`}
+            placeholder={placeholder}
+            {...props}
+          />
+        )}
+        {rightElement && (
+          <div className="absolute inset-y-0 right-3 flex items-center">
+            {rightElement}
+          </div>
+        )}
+      </div>
       {error && (
         <motion.span
           initial={{ opacity: 0, y: -10 }}
